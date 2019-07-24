@@ -33,8 +33,9 @@ function draw() {
   ctx.drawImage(img, x, y, 64, 64);
   ctx.fillStyle = "red";
   ctx.fillRect(256, 80, 20, 20);
-  x = x + 1;
+  x = x + 5;
   if (x == 200){
+       ctx.clearRect(0, 0, c.width, c.height);
       ctx.drawImage(img, x, y, 64, 64);
        ctx.fillStyle = "green";
        ctx.fillRect(256, 80, 20, 20);
