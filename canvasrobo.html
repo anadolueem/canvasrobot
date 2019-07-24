@@ -1,48 +1,87 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<p>Image to use:</p>
-<img id="mobilrobo" width="64" height="64" src="mobile.png" alt="The Scream">
+  <p>Image to use:</p>
+  <img id="mobilrobo" width="64" height="64" src="mobile.png" alt="The Scream">
+  <img id="mobilroboFlip" width="64" height="64" src="mobileFlip.png" alt="The Scream">
 
-<p>RoboFUN - Grab-BOX</p>
+  <p>RoboFUN - Grab-BOX</p>
 
-<canvas id="myCanvas" width="512" height="256" style="border:1px solid #d3d3d3;">
+  <canvas id="myCanvas" width="512" height="256" style="border:1px solid #d3d3d3;">
 
-</canvas>
+  </canvas>
 
-<script>
-var x;
-var y;
-x = 80;
-y = 83;
- var c = document.getElementById("myCanvas");
-  var ctx = c.getContext("2d");
-  var img = document.getElementById("mobilrobo");
- var myVar = setInterval(draw, 100);
-window.onload = function() {
- 
- 
-}
+  <script>
+    var x;
+    var y;
+    x = 80;
+    y = 83;
+    var objX;
+    var objY;
+    objX = 256;
+    objY = 80;
+    objectObtained = false;
+    missionCompleted = false;
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("mobilrobo");
+    var imgFlip = document.getElementById("mobilroboFlip");
+    var myVar = setInterval(draw, 100);
+    window.onload = function () {
+      
 
-function draw() {
-  ctx.clearRect(0, 0, c.width, c.height);
-  ctx.drawImage(img, x, y, 64, 64);
-  ctx.fillStyle = "red";
-  ctx.fillRect(256, 80, 20, 20);
-  x = x + 5;
-  if (x == 200){
-       ctx.clearRect(0, 0, c.width, c.height);
+    }
+
+
+    function draw() {
+      ctx.clearRect(0, 0, c.width, c.height);
       ctx.drawImage(img, x, y, 64, 64);
-       ctx.fillStyle = "green";
-       ctx.fillRect(256, 80, 20, 20);
-      clearInterval(myVar);
-  }
+      ctx.fillStyle = "red";
+      ctx.fillRect(objX, objY, 20, 20);
+      if (x == 200 && !objectObtained) {
+        console.log("test1", !objectObtained);
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.drawImage(img, x, y, 64, 64);
+        ctx.fillStyle = "green";
+        ctx.fillRect(objX, objY, 20, 20);
+        objectObtained = true;
+        // clearInterval(myVar);
+      } else if (x < 200 && !objectObtained) {
+        console.log("test2");
+        x = x + 5;
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.drawImage(img, x, y, 64, 64);
+        ctx.fillStyle = "red";
+        ctx.fillRect(objX, objY, 20, 20);
+      } else if (objectObtained && x == 200) {
+        console.log("test3");
+        x = x - 5;
+        objX = objX - 72;
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.drawImage(imgFlip, x, y, 64, 64);
+        ctx.fillStyle = "green";
+        ctx.fillRect(objX, objY, 20, 20);
+      } else if(x > 80 && objectObtained){
+        x = x - 5;
+        objX = objX - 5;
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.drawImage(imgFlip, x, y, 64, 64);
+        ctx.fillStyle = "green";
+        ctx.fillRect(objX, objY, 20, 20);
+      } else if(x <= 80 && objectObtained){
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.drawImage(imgFlip, x, y, 64, 64);
+        ctx.fillStyle = "green";
+        ctx.fillRect(objX, objY, 20, 20);
+      }
 
-}
-</script>
+    }
+  </script>
 
-<p><strong>Note:</strong> MUTLU ROBOTU TERS CEVIRMEM LASIM.</p>
+  <p><strong>Note:</strong> MUTLU ROBOTU TERS CEVIRMEM LASIM.</p>
 
 </body>
+
 </html>
